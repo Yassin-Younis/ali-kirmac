@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yassin-younis.github.io/ali-kirmac/sitemap.xml
