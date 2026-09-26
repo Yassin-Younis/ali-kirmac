@@ -207,7 +207,7 @@ body.cursor-big .cursor { transform: translate(-50%, -50%) scale(4); }
 .about__title { grid-area: title; font: italic 400 clamp(48px, 7vw, 120px)/.95 var(--serif); letter-spacing: -.02em; }
 .about__body { grid-area: body; display: grid; gap: 22px; max-width: 560px; font-size: clamp(18px, 1.5vw, 24px); line-height: 1.5; color: rgba(244,239,230,.86); }
 .about__photo { grid-area: photo; position: relative; justify-self: end; width: min(100%, 440px); margin-top: 8vh; }
-.about__photo img { border-radius: 6px; filter: saturate(.85) contrast(1.05); }
+.about__photo img { border-radius: 8px; }
 .about__photo figcaption { position: absolute; left: -12px; bottom: 28px; transform: rotate(-90deg); transform-origin: left bottom; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 900px) {
   .about__grid { grid-template-columns: 1fr; grid-template-areas: "eye" "title" "body" "photo"; }
@@ -259,12 +259,12 @@ body.cursor-big .cursor { transform: translate(-50%, -50%) scale(4); }
 .tile__badge { position: absolute; right: 4%; bottom: 4%; width: 36%; filter: drop-shadow(0 16px 30px rgba(0,0,0,.45)); animation: badgeSpin 24s linear infinite; }
 @keyframes badgeSpin { to { transform: rotate(360deg); } }
 .tile--portrait { transform: rotate(2.5deg); }
-.tile--portrait img { border-radius: 50%; box-shadow: 0 40px 80px -30px rgba(123,211,137,.4); }
+.tile--portrait img { border-radius: 10px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); }
 .market__copy { display: grid; gap: 22px; font-size: clamp(17px, 1.3vw, 21px); color: rgba(244,239,230,.86); }
 .market__facts { display: grid; grid-template-columns: repeat(3, auto); gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.market__facts li { display: grid; }
-.market__facts strong { font: italic 400 1.6rem/1.1 var(--serif); color: var(--leaf); }
-.market__facts span { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.market__facts div { display: grid; }
+.market__facts dd { font: italic 400 1.6rem/1.1 var(--serif); color: var(--leaf); }
+.market__facts dt { font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .market__links { display: flex; flex-wrap: wrap; gap: 12px; }
 .market__where { max-width: 1400px; margin: 72px auto 0; padding-top: 24px; border-top: 1px solid var(--line); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 @media (max-width: 1000px) {
