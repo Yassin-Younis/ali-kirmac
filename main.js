@@ -165,9 +165,9 @@
         if (el === figure) {
           el.style.transform = `translate3d(${mx}px, ${-y * d - p * 40}px, 0) scale(${1 + p * .12})`;
         } else if (el.classList.contains("hero__line--a")) {
-          el.style.transform = `translate3d(${mx - y * d * .8}px, calc(var(--oy) + ${-y * d * .35}px), 0)`;
+          el.style.transform = `translate(calc(var(--ox) + ${mx - y * d * .8}px), calc(var(--oy) + ${-y * d * .35}px))`;
         } else if (el.classList.contains("hero__line--b")) {
-          el.style.transform = `translate3d(${mx + y * d * .8}px, calc(var(--oy) + ${-y * d * .35}px), 0)`;
+          el.style.transform = `translate(calc(var(--ox) + ${mx + y * d * .8}px), calc(var(--oy) + ${-y * d * .35}px))`;
         } else {
           el.style.transform = `translate3d(${mx}px, ${my - y * d}px, 0)`;
         }
