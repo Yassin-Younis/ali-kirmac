@@ -28,6 +28,7 @@
       "mk.f2.t": "Wellness", "mk.f2.s": "shot'lar",
       "mk.f3.t": "Doğal", "mk.f3.s": "atıştırmalıklar",
       "mk.where": "Next Level AVM · Dumlupınar Blv. No:3C1-160 · Çankaya, Ankara",
+      "mk.img": "Soğuk sıkım meyve suları",
       "ct.eyebrow": "İletişim", "ct.title": "Konuşalım.",
       "ct.sub": "Bir fikir, bir iş birliği ya da sadece bir merhaba için.",
       "ct.phone": "Telefon", "ct.mail": "E-posta", "ct.addr": "Adres",
@@ -56,6 +57,7 @@
       "mk.f2.t": "Wellness", "mk.f2.s": "shots",
       "mk.f3.t": "Natural", "mk.f3.s": "snacks",
       "mk.where": "Next Level Mall · Dumlupınar Blv. No:3C1-160 · Çankaya, Ankara",
+      "mk.img": "Cold-pressed juices",
       "ct.eyebrow": "Contact", "ct.title": "Let's talk.",
       "ct.sub": "For an idea, a collaboration, or just to say hello.",
       "ct.phone": "Phone", "ct.mail": "Email", "ct.addr": "Address",
@@ -163,9 +165,9 @@
         if (el === figure) {
           el.style.transform = `translate3d(${mx}px, ${-y * d - p * 40}px, 0) scale(${1 + p * .12})`;
         } else if (el.classList.contains("hero__line--a")) {
-          el.style.transform = `translate3d(${mx - y * d * .8}px, calc(-.55em + ${-y * d * .35}px), 0)`;
+          el.style.transform = `translate3d(${mx - y * d * .8}px, calc(var(--oy) + ${-y * d * .35}px), 0)`;
         } else if (el.classList.contains("hero__line--b")) {
-          el.style.transform = `translate3d(${mx + y * d * .8}px, calc(.1em + ${-y * d * .35}px), 0)`;
+          el.style.transform = `translate3d(${mx + y * d * .8}px, calc(var(--oy) + ${-y * d * .35}px), 0)`;
         } else {
           el.style.transform = `translate3d(${mx}px, ${my - y * d}px, 0)`;
         }
@@ -181,7 +183,7 @@
       const center = r.top + r.height / 2 - vh / 2;
       const f = parseFloat(el.dataset.parallax);
       const base = el.dataset.base || (el.dataset.base = getComputedStyle(el).rotate !== "none" ? "" : "");
-      const rot = el.classList.contains("tile--card") ? "rotate(-3deg)" : el.classList.contains("tile--portrait") ? "rotate(2.5deg)" : "";
+      const rot = el.classList.contains("tile--brand") ? "rotate(-3deg)" : el.classList.contains("tile--portrait") ? "rotate(2.5deg)" : "";
       if (el.classList.contains("contact__bg")) el.style.transform = `translate(-50%, calc(-50% + ${center * f}px))`;
       else if (el.classList.contains("is-in") || !el.classList.contains("reveal")) el.style.transform = `translate3d(0, ${center * f}px, 0) ${rot}`;
     });
