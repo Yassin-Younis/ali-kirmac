@@ -9,7 +9,7 @@
       "meta.og": "Detox Market kurucusu · Ankara",
       "eyebrow": "Ankara, Türkiye",
       "role.static": "Girişimci",
-      "roles": ["Detox Market Kurucusu", "Sağlıklı yaşam", "Soğuk sıkım", "Yeni fikirler", "İş birliğine açık"],
+      "roles": ["Girişimci", "Detox Market Kurucusu", "Sağlıklı yaşam", "Soğuk sıkım", "Yeni fikirler", "Ankara, Türkiye"],
       "tag": "Kurucu",
       "btn.wa": "WhatsApp", "btn.ig": "Instagram", "btn.save": "Rehbere ekle",
       "d.phone": "Telefon", "d.mail": "E-posta", "d.addr": "Adres",
@@ -22,7 +22,7 @@
       "meta.og": "Founder of Detox Market · Ankara",
       "eyebrow": "Ankara, Türkiye",
       "role.static": "Entrepreneur",
-      "roles": ["Founder of Detox Market", "Healthy living", "Cold-pressed", "New ideas", "Open to collaboration"],
+      "roles": ["Entrepreneur", "Founder of Detox Market", "Healthy living", "Cold-pressed", "New ideas", "Ankara, Türkiye"],
       "tag": "Founder",
       "btn.wa": "WhatsApp", "btn.ig": "Instagram", "btn.save": "Save contact",
       "d.phone": "Phone", "d.mail": "Email", "d.addr": "Address",
@@ -37,26 +37,41 @@
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let lang = "tr";
 
-  /* ---------- rotating role line ---------- */
-  const rot = $(".rotator");
-  let rotTimer = 0, rotIdx = 0, rotWords = [];
-  const buildRotator = () => {
-    clearTimeout(rotTimer);
-    rot.textContent = "";
-    rotWords = I18N[lang].roles.map(t => { const s = document.createElement("span"); s.className = "rotator__w"; s.textContent = t; rot.appendChild(s); return s; });
-    // reserve the widest word so the line never reflows
-    rot.style.minWidth = Math.max(...rotWords.map(w => w.offsetWidth)) + "px";
-    rotIdx = 0; rotWords[0].classList.add("is-in");
-    if (reduced) return;
-    const step = () => {
-      const cur = rotWords[rotIdx], next = rotWords[(rotIdx + 1) % rotWords.length];
-      cur.classList.remove("is-in"); cur.classList.add("is-out");
-      next.classList.remove("is-out"); next.classList.add("is-in");
-      setTimeout(() => cur.classList.remove("is-out"), 900);
-      rotIdx = (rotIdx + 1) % rotWords.length;
-      rotTimer = setTimeout(step, 2600);
+  /* ---------- passing text: scramble-decode between phrases ---------- */
+  const rot = $(".rotator"), rotT = $(".rotator__t");
+  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/·-";
+  let rotTimer = 0, rotRaf = 0, rotIdx = 0, rotWords = [];
+  const scrambleTo = (text, done) => {
+    cancelAnimationFrame(rotRaf);
+    const from = rotT.textContent, len = Math.max(from.length, text.length), t0 = performance.now(), dur = 900;
+    const order = Array.from({ length: len }, (_, i) => i).sort(() => Math.random() - .5); // letters lock in random order
+    const step = now => {
+      const p = Math.min(1, (now - t0) / dur);
+      let out = "";
+      for (let i = 0; i < len; i++) {
+        const ch = text[i] || "";
+        const lockAt = (order.indexOf(i) + 1) / len * .85;
+        if (p >= lockAt) out += ch;
+        else if (ch === " ") out += " ";
+        else out += GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      }
+      rotT.textContent = out;
+      if (p < 1) rotRaf = requestAnimationFrame(step); else { rotT.textContent = text; done && done(); }
     };
-    rotTimer = setTimeout(step, 2600);
+    rotRaf = requestAnimationFrame(step);
+  };
+  const buildRotator = () => {
+    clearTimeout(rotTimer); cancelAnimationFrame(rotRaf);
+    rotWords = I18N[lang].roles;
+    // reserve the widest phrase so nothing reflows while letters change
+    const probe = document.createElement("span"); probe.style.cssText = "position:absolute;visibility:hidden;white-space:nowrap;font:inherit";
+    rot.appendChild(probe);
+    rot.style.minWidth = Math.max(...rotWords.map(w => { probe.textContent = w; return probe.offsetWidth; })) + "px";
+    probe.remove();
+    rotIdx = 0; rotT.textContent = rotWords[0];
+    if (reduced) return;
+    const next = () => { rotIdx = (rotIdx + 1) % rotWords.length; scrambleTo(rotWords[rotIdx], () => { rotTimer = setTimeout(next, 2400); }); };
+    rotTimer = setTimeout(next, 2400);
   };
 
   /* ---------- i18n ---------- */
