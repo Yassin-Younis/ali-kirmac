@@ -1,10 +1,8 @@
-# Ali Kırmaç · personal portfolio
+# Ali Kırmaç · digital business card
 
-Static one-page portfolio for Ali Kırmaç, founder of Detox Market (Ankara).
-Turkish first with an English toggle (`?lang=en`). Pure HTML/CSS/JS, no build step.
+One-screen personal card for Ali Kırmaç, founder of Detox Market (Ankara). Turkish first with an English toggle (`?lang=en`). Pure HTML/CSS/JS, no build step.
 
 Live: https://yassin-younis.github.io/ali-kirmac/
 
-- `index.html`, `styles.css`, `main.js`, `img/`
-- Portrait: green-screen variant generated from Ali's photo, background removed with rembg.
-- Motion: layered hero parallax + mouse tilt, pinned manifesto, velocity marquee, scroll reveals. All disabled under `prefers-reduced-motion`.
+- `index.html`, `styles.css`, `main.js`, `img/`, `ali-kirmac.vcf` (save-to-contacts card with photo)
+- Motion: staggered name reveal, cycling role line, pointer/gyro photo tilt, magnetic buttons, custom cursor. All off under `prefers-reduced-motion`.
